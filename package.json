@@ -1,5 +1,5 @@
 {
-  "name": "@starikcetin/git-upm-publisher-2",
+  "name": "git-upm-publisher",
   "version": "1.0.0",
   "description": "Automate UPM package releases for Git repositories containing Unity plugins.",
   "author": "starikcetin <cetinsamedtarik@gmail.com> (https://github.com/starikcetin)",
@@ -11,6 +11,9 @@
   "bin": {
     "gup": "dist/index.js"
   },
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "find-unused-exports": "ts-unused-exports tsconfig.json",
     "type-check": "tsc --noEmit",
