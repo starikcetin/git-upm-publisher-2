@@ -8,7 +8,7 @@ Written in Typescript this time.
 # Install
 
 ```shell
-npm i git-upm-publisher
+npm i -g git-upm-publisher
 ```
 
 Make sure to delete the python version if you were using it:
