@@ -1,21 +1,32 @@
 import gitSnapshot from "git-snapshot";
 import path from "path";
+import { findRepoRoot } from "./utils/find-repo-root";
 
 export async function executeSnapshot(
   packageJsonPath: path.ParsedPath,
-  version: string
+  version: string,
+  noPush: boolean,
+  force: boolean,
+  tagPrefix: string
 ) {
-  const pathStr = packageJsonPath.dir;
+  const packagePathStr = packageJsonPath.dir;
+  const gitRepoPath = await findRepoRoot(packageJsonPath);
+  const gitRepoPathStr = path.format(gitRepoPath);
 
-  return gitSnapshot({
-    prefix: pathStr,
+  const opts: any = {
+    prefix: packagePathStr,
     branch: "upm",
-    message: `Release ${version}`,
+    message: `upm release ${version}`,
     author: "snapshot",
-    force: false,
-    tag: version,
-    remote: "origin",
+    force: force,
+    tag: tagPrefix + version,
     dryRun: false,
-    cwd: process.cwd()
-  });
+    cwd: gitRepoPathStr
+  };
+
+  if (!noPush) {
+    opts.remote = "origin";
+  }
+
+  return gitSnapshot(opts);
 }
