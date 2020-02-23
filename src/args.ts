@@ -15,12 +15,13 @@ export const args = yargs
     alias: "c",
     type: "boolean",
     description:
-      "Disable the auto-commit before publishing that includes the version change in the package.json."
+      "Disable the auto-commit before publishing that includes the version change in the 'package.json'."
   })
   .option("package", {
     alias: "p",
     type: "string",
-    description: "Skip searching and use this package.json path."
+    description:
+      "Skip searching and use this package.json path (must include the 'package.json')."
   })
   .option("tagPrefix", {
     alias: "t",

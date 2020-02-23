@@ -1,43 +1,41 @@
 {
-  "name": "git-upm-publisher-2",
+  "name": "@starikcetin/git-upm-publisher-2",
   "version": "1.0.0",
-  "description": "git upm publisher, version 2",
-  "author": "",
+  "description": "Automate UPM package releases for Git repositories containing Unity plugins.",
+  "author": "starikcetin <cetinsamedtarik@gmail.com> (https://github.com/starikcetin)",
   "license": "MIT",
   "homepage": "https://github.com/starikcetin/git-upm-publisher-2",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/starikcetin/git-upm-publisher-2.git"
-  },
-  "bugs": {
-    "url": "https://github.com/starikcetin/git-upm-publisher-2/issues"
-  },
+  "repository": "git+https://github.com/starikcetin/git-upm-publisher-2.git",
+  "bugs": "https://github.com/starikcetin/git-upm-publisher-2/issues",
   "main": "dist/index.js",
   "bin": {
     "gup": "dist/index.js"
   },
   "scripts": {
-    "start": "npm run build && node dist/index.js",
+    "find-unused-exports": "ts-unused-exports tsconfig.json",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
-    "build": "rimraf dist/ && npm run build:types && npm run build:js",
+    "prepublishOnly": "npm run build",
+    "prebuild": "rimraf dist/ && npm run find-unused-exports",
+    "start": "npm run build && node dist/index.js",
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir dist --extensions \".ts\" --source-maps inline",
-    "find-unused-exports": "ts-unused-exports tsconfig.json"
+    "build": "npm run build:types && npm run build:js"
   },
   "dependencies": {
     "find-up": "^4.1.0",
-    "git-snapshot": "^2.2.0",
+    "git-snapshot": "^2.2.1",
     "glob": "^7.1.6",
     "glob-promise": "^3.4.0",
     "is-git-dirty": "^1.0.0",
     "jsonfile": "^5.0.0",
     "prompts": "^2.3.1",
+    "simple-git": "^1.131.0",
     "yargs": "^15.1.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.3",
-    "@babel/core": "^7.8.3",
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
     "@babel/preset-env": "^7.8.4",
@@ -45,7 +43,7 @@
     "@types/jsonfile": "^5.0.0",
     "@types/prompts": "^2.0.3",
     "@types/yargs": "^15.0.3",
-    "babel-cli": "^6.26.0",
+    "babel-preset-minify": "^0.5.1",
     "rimraf": "^3.0.2",
     "ts-unused-exports": "^6.0.0",
     "typescript": "^3.8.2"

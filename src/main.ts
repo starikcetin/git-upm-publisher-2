@@ -5,30 +5,34 @@ import { updateVersion } from "./update-version";
 import { checkFileReadWrite } from "./utils/check-file-read-write";
 import { checkRepoStatus } from "./utils/check-repo-status";
 import { getPackageJsonPath } from "./utils/get-package-json-path";
+import { makeVersionCommit } from "./make-version-commit";
 
 const force = !!args.force;
 const noPush = !!args.noPush;
 const noCommit = !!args.noCommit;
-let packagePath: path.ParsedPath;
+let packageJsonPath: path.ParsedPath;
 let tagPrefix = args.tagPrefix;
 
 export async function main() {
   await handleArgs();
 
-  if (!packagePath) {
-    packagePath = await getPackageJsonPath();
-    console.log("<main> 'package.json' path:", path.format(packagePath));
+  if (!packageJsonPath) {
+    packageJsonPath = await getPackageJsonPath();
+    console.log("<main> 'package.json' path:", path.format(packageJsonPath));
   }
 
   if (!force) {
-    await checkRepoStatus(packagePath);
-    console.log("<main> Git working tree is clean.");
+    await checkRepoStatus(packageJsonPath);
   }
 
-  const newVersion = await updateVersion(packagePath);
+  const newVersion = await updateVersion(packageJsonPath);
   console.log("<main> New version:", newVersion);
 
-  await executeSnapshot(packagePath, newVersion, noPush, force, tagPrefix);
+  if (!noCommit) {
+    await makeVersionCommit(packageJsonPath, newVersion);
+  }
+
+  await executeSnapshot(packageJsonPath, newVersion, noPush, force, tagPrefix);
 }
 
 async function handleArgs() {
@@ -37,7 +41,7 @@ async function handleArgs() {
   }
 
   if (args.package) {
-    packagePath = path.parse(args.package);
-    await checkFileReadWrite(packagePath);
+    packageJsonPath = path.parse(args.package);
+    await checkFileReadWrite(packageJsonPath);
   }
 }
