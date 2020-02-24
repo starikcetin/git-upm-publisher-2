@@ -11,7 +11,7 @@ Written in Typescript this time.
 npm i -g git-upm-publisher
 ```
 
-Make sure to delete the python version if you were using it:
+#### Make sure to delete the python version if you were using it:
 
 ```shell
 pip uninstall git-upm-publisher
