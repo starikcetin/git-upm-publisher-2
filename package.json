@@ -1,6 +1,6 @@
 {
   "name": "git-upm-publisher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Automate UPM package releases for Git repositories containing Unity plugins.",
   "author": "starikcetin <cetinsamedtarik@gmail.com> (https://github.com/starikcetin)",
   "license": "MIT",
