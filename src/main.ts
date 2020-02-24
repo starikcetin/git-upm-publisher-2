@@ -6,6 +6,7 @@ import { checkFileReadWrite } from "./utils/check-file-read-write";
 import { checkRepoStatus } from "./utils/check-repo-status";
 import { getPackageJsonPath } from "./utils/get-package-json-path";
 import { makeVersionCommit } from "./make-version-commit";
+import { makePathAbsolute } from "./utils/make-path-absolute";
 
 const force = !!args.force;
 const noPush = !!args.noPush;
@@ -18,8 +19,10 @@ export async function main() {
 
   if (!packageJsonPath) {
     packageJsonPath = await getPackageJsonPath();
-    console.log("<main> 'package.json' path:", path.format(packageJsonPath));
   }
+
+  packageJsonPath = makePathAbsolute(packageJsonPath);
+  console.log("<main> 'package.json' path:", path.format(packageJsonPath));
 
   if (!force) {
     await checkRepoStatus(packageJsonPath);

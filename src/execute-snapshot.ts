@@ -17,7 +17,8 @@ export async function executeSnapshot(
     prefix: packagePathStr,
     branch: "upm",
     message: `upm release ${version}`,
-    author: "git-upm-publisher",
+    author:
+      "git-upm-publisher <https://github.com/starikcetin/git-upm-publisher-2/>",
     force: force,
     tag: tagPrefix + version,
     dryRun: false,
