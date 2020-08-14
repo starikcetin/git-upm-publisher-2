@@ -5,6 +5,7 @@ import { findRepoRoot } from "./utils/find-repo-root";
 export async function executeSnapshot(
   packagePath: path.ParsedPath,
   version: string,
+  branch: string,
   noPush: boolean,
   force: boolean,
   tagPrefix: string
@@ -15,11 +16,11 @@ export async function executeSnapshot(
 
   const opts: any = {
     prefix: packagePathStr,
-    branch: "upm",
+    branch,
     message: `upm release ${version}`,
     author:
       "git-upm-publisher <https://github.com/starikcetin/git-upm-publisher-2/>",
-    force: force,
+    force,
     tag: tagPrefix + version,
     dryRun: false,
     cwd: gitRepoPathStr
