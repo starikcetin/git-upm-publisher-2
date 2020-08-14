@@ -1,12 +1,14 @@
 import gitSnapshot from "git-snapshot";
 import path from "path";
 import { findRepoRoot } from "./utils/find-repo-root";
+import { getAuthor } from "./utils/get-author";
 
 export async function executeSnapshot(
   packagePath: path.ParsedPath,
   version: string,
   branch: string,
   noPush: boolean,
+  noAuthor: boolean,
   force: boolean,
   tagPrefix: string
 ) {
@@ -18,8 +20,6 @@ export async function executeSnapshot(
     prefix: packagePathStr,
     branch,
     message: `upm release ${version}`,
-    author:
-      "git-upm-publisher <https://github.com/starikcetin/git-upm-publisher-2/>",
     force,
     tag: tagPrefix + version,
     dryRun: false,
@@ -28,6 +28,10 @@ export async function executeSnapshot(
 
   if (!noPush) {
     opts.remote = "origin";
+  }
+
+  if (!noAuthor) {
+    opts.author = await getAuthor();
   }
 
   return gitSnapshot(opts);

@@ -10,6 +10,7 @@ import { makePathAbsolute } from "./utils/make-path-absolute";
 
 const branch = args.branch;
 const force = !!args.force;
+const noAuthor = !!args.noAuthor;
 const noPush = !!args.noPush;
 const noCommit = !!args.noCommit;
 let packageJsonPath: path.ParsedPath;
@@ -33,10 +34,10 @@ export async function main() {
   console.log("<main> New version:", newVersion);
 
   if (!noCommit) {
-    await makeVersionCommit(packageJsonPath, newVersion);
+    await makeVersionCommit(packageJsonPath, newVersion, noAuthor);
   }
 
-  await executeSnapshot(packageJsonPath, newVersion, branch, noPush, force, tagPrefix);
+  await executeSnapshot(packageJsonPath, newVersion, branch, noPush, noAuthor, force, tagPrefix);
 }
 
 async function handleArgs() {
