@@ -27,6 +27,7 @@ Navigate to the folder with the `package.json`, and run `gup`.
 |-------------|-------|---------|---------------------------------------------------------------------------------------------------|
 | --help      |       | boolean | Show help                                                                                         |
 | --version   |       | boolean | Show version number                                                                               |
+| --branch    | -b    | string | Name of the branch to publish the UPM package to. Defaults to "upm".                               |
 | --force     | -f    | boolean | Disable checks and execute snapshot with force flag.                                              |
 | --noPush    | -n    | boolean | Disable auto-pushing of the upm branch to the origin.                                             |
 | --noCommit  | -c    | boolean | Disable the auto-commit before publishing that includes the version change in the 'package.json'. |
