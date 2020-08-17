@@ -13,8 +13,9 @@ const force = !!args.force;
 const noAuthor = !!args.noAuthor;
 const noPush = !!args.noPush;
 const noCommit = !!args.noCommit;
+const tagPrefix = args.tagPrefix;
+
 let packageJsonPath: path.ParsedPath;
-let tagPrefix = args.tagPrefix;
 
 export async function main() {
   await handleArgs();
@@ -31,10 +32,10 @@ export async function main() {
   }
 
   const newVersion = await updateVersion(packageJsonPath);
-  console.log("<main> New version:", newVersion);
+  console.log(`<main> New version: ${tagPrefix}${newVersion}`);
 
   if (!noCommit) {
-    await makeVersionCommit(packageJsonPath, newVersion, noAuthor);
+    await makeVersionCommit(packageJsonPath, newVersion, noAuthor, tagPrefix);
   }
 
   await executeSnapshot(packageJsonPath, newVersion, branch, noPush, noAuthor, force, tagPrefix);
