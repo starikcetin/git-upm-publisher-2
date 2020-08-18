@@ -1,6 +1,12 @@
 import yargs from "yargs";
 
 export const args = yargs
+  .option("branch", {
+    alias: "b",
+    type: "string",
+    default: "upm",
+    description: "Name of the branch to publish the UPM package to."
+  })
   .option("force", {
     alias: "f",
     type: "boolean",
@@ -9,7 +15,7 @@ export const args = yargs
   .option("noPush", {
     alias: "n",
     type: "boolean",
-    description: "Disable auto-pushing of the upm branch to the origin."
+    description: "Disable auto-pushing of the UPM package branch to the origin."
   })
   .option("noCommit", {
     alias: "c",

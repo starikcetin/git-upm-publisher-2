@@ -1,13 +1,14 @@
 import path from "path";
 import { args } from "./args";
 import { executeSnapshot } from "./execute-snapshot";
+import { makeVersionCommit } from "./make-version-commit";
 import { updateVersion } from "./update-version";
 import { checkFileReadWrite } from "./utils/check-file-read-write";
 import { checkRepoStatus } from "./utils/check-repo-status";
 import { getPackageJsonPath } from "./utils/get-package-json-path";
-import { makeVersionCommit } from "./make-version-commit";
 import { makePathAbsolute } from "./utils/make-path-absolute";
 
+const branch = args.branch;
 const force = !!args.force;
 const noPush = !!args.noPush;
 const noCommit = !!args.noCommit;
@@ -35,7 +36,7 @@ export async function main() {
     await makeVersionCommit(packageJsonPath, newVersion);
   }
 
-  await executeSnapshot(packageJsonPath, newVersion, noPush, force, tagPrefix);
+  await executeSnapshot(packageJsonPath, newVersion, branch, noPush, force, tagPrefix);
 }
 
 async function handleArgs() {
