@@ -12,6 +12,11 @@ export const args = yargs
     type: "boolean",
     description: "Disable checks and execute snapshot with force flag."
   })
+  .option("noAuthor", {
+    alias: "a",
+    type: "boolean",
+    description: "Disable overriding the commit author for auto-commits made by this tool."
+  })
   .option("noPush", {
     alias: "n",
     type: "boolean",

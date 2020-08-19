@@ -1,10 +1,12 @@
 import path from "path";
-import { findRepoRoot } from "./utils/find-repo-root";
 import simpleGit from "simple-git/promise";
+import { findRepoRoot } from "./utils/find-repo-root";
+import { getAuthor } from "./utils/get-author";
 
 export async function makeVersionCommit(
   packageJsonPath: path.ParsedPath,
-  version: string
+  version: string,
+  noAuthor: boolean
 ) {
   const packageJsonPathStr = path.format(packageJsonPath);
   const gitRepoPath = await findRepoRoot(packageJsonPath);
@@ -12,13 +14,16 @@ export async function makeVersionCommit(
 
   const git = simpleGit(gitRepoPathStr);
 
+  const opts : simpleGit.Options = {};
+
+  if (!noAuthor) {
+    opts["--author"] = await getAuthor();
+  }
+
   await git.add(packageJsonPathStr);
   await git.commit(
     `version change for upm release (${version})`,
     packageJsonPathStr,
-    {
-      "--author":
-        "git-upm-publisher <https://github.com/starikcetin/git-upm-publisher-2/>"
-    }
+    opts
   );
 }
