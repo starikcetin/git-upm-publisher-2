@@ -19,7 +19,7 @@ export async function executeSnapshot(
   const opts: any = {
     prefix: packagePathStr,
     branch,
-    message: `upm release ${version}`,
+    message: `UPM release ${tagPrefix}${version}`,
     force,
     tag: tagPrefix + version,
     dryRun: false,

@@ -6,7 +6,8 @@ import { getAuthor } from "./utils/get-author";
 export async function makeVersionCommit(
   packageJsonPath: path.ParsedPath,
   version: string,
-  noAuthor: boolean
+  noAuthor: boolean,
+  tagPrefix: string
 ) {
   const packageJsonPathStr = path.format(packageJsonPath);
   const gitRepoPath = await findRepoRoot(packageJsonPath);
@@ -22,7 +23,7 @@ export async function makeVersionCommit(
 
   await git.add(packageJsonPathStr);
   await git.commit(
-    `version change for upm release (${version})`,
+    `Version change for UPM release (${tagPrefix}${version})`,
     packageJsonPathStr,
     opts
   );
