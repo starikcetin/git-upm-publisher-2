@@ -9,6 +9,6 @@ export async function writeVersionToPackageJson(
   let packageJsonData = await jsonfile.readFile(pathStr);
   packageJsonData["version"] = version;
   return jsonfile.writeFile(pathStr, packageJsonData, {
-    spaces: "\t"
+    spaces: 2
   });
 }
