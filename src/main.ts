@@ -45,7 +45,7 @@ export async function main() {
   const isFirstTime = !(remoteBranchExists || localBranchExists);
 
   if(localBranchExists && !remoteBranchExists) {
-    console.warn(`<main> A branch named ${branch} exists locally, but not on the remote. Pulling will be skipped.`);
+    console.warn(`<main> A branch named ${branch} exists locally, but not on the remote ${remote}. Pulling will be skipped.`);
   }
 
   if(isFirstTime) {
@@ -67,7 +67,9 @@ export async function main() {
 
   await executeSnapshot(packageJsonPath, newVersion, branch, noPush, noAuthor, force, tagPrefix, remote);
 
-  await pullUpmBranch(packageJsonPath, branch, remote);
+  if(!noPull) {
+    await pullUpmBranch(packageJsonPath, branch, remote);
+  }
 }
 
 async function handleArgs() {

@@ -6,7 +6,7 @@ export const args = yargs
     alias: "r",
     type: "string",
     default: "origin",
-    description: "Name of the remote to publish the UPM package to."
+    description: "Name of the remote where UPM package branch resides or will reside."
   })
   .option("branch", {
     alias: "b",
@@ -32,7 +32,7 @@ export const args = yargs
   .option("noPull", {
     alias: "l",
     type: "boolean",
-    description: "Disable pulling of the UPM package branch before starting the pulishing process."
+    description: "Disable pulling of the UPM package branch before and after the publishing process."
   })
   .option("noCommit", {
     alias: "c",
