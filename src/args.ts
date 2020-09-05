@@ -2,6 +2,12 @@ import yargs from "yargs";
 
 export const args = yargs
   .strict()
+  .option("remote", {
+    alias: "r",
+    type: "string",
+    default: "origin",
+    description: "Name of the remote to publish the UPM package to."
+  })
   .option("branch", {
     alias: "b",
     type: "string",
@@ -22,6 +28,11 @@ export const args = yargs
     alias: "n",
     type: "boolean",
     description: "Disable auto-pushing of the UPM package branch to the origin."
+  })
+  .option("noPull", {
+    alias: "l",
+    type: "boolean",
+    description: "Disable pulling of the UPM package branch before starting the pulishing process."
   })
   .option("noCommit", {
     alias: "c",
