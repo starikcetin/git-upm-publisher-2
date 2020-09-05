@@ -1,6 +1,7 @@
 import yargs from "yargs";
 
 export const args = yargs
+  .strict()
   .option("branch", {
     alias: "b",
     type: "string",
