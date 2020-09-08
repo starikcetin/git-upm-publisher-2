@@ -10,7 +10,8 @@ export async function executeSnapshot(
   noPush: boolean,
   noAuthor: boolean,
   force: boolean,
-  tagPrefix: string
+  tagPrefix: string,
+  remote: string
 ) {
   const packagePathStr = packagePath.dir;
   const gitRepoPath = await findRepoRoot(packagePath);
@@ -27,7 +28,7 @@ export async function executeSnapshot(
   };
 
   if (!noPush) {
-    opts.remote = "origin";
+    opts.remote = remote;
   }
 
   if (!noAuthor) {
