@@ -12,7 +12,7 @@ import { hasRemote } from "./utils/has-remote";
 import { hasRemoteBranch } from "./utils/has-remote-branch";
 import { hasLocalBranch } from "./utils/has-local-branch";
 import { learnVersion } from "./utils/learn-version";
-import { createGitInstance } from "./create-git-instance";
+import { createGitInstance } from "./utils/create-git-instance";
 
 const branch = args.branch;
 const force = !!args.force;
