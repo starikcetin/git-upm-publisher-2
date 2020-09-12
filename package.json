@@ -24,8 +24,8 @@
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir dist --extensions \".ts\" --source-maps inline",
     "build": "npm run build:types && npm run build:js",
-    "prettier:write": "prettier --write .",
-    "prettier:check": "prettier --check ."
+    "prettier:write": "prettier --write src",
+    "prettier:check": "prettier --check src"
   },
   "dependencies": {
     "find-up": "^4.1.0",
