@@ -1,5 +1,5 @@
-const pjson = require('../../package.json')
+const pjson = require('../../package.json');
 
 export async function getAuthor() {
-    return `${pjson.name} <${pjson.homepage}>`;
+  return `${pjson.name} <${pjson.homepage}>`;
 }
