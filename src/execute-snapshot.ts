@@ -1,7 +1,7 @@
-import gitSnapshot from "git-snapshot";
-import path from "path";
-import { findRepoRoot } from "./utils/find-repo-root";
-import { getAuthor } from "./utils/get-author";
+import gitSnapshot from 'git-snapshot';
+import path from 'path';
+import { findRepoRoot } from './utils/find-repo-root';
+import { getAuthor } from './utils/get-author';
 
 export async function executeSnapshot(
   packagePath: path.ParsedPath,
@@ -11,7 +11,7 @@ export async function executeSnapshot(
   noAuthor: boolean,
   force: boolean,
   tagPrefix: string,
-  remote: string
+  remote: string,
 ) {
   const packagePathStr = packagePath.dir;
   const gitRepoPath = await findRepoRoot(packagePath);
@@ -24,7 +24,7 @@ export async function executeSnapshot(
     force,
     tag: tagPrefix + version,
     dryRun: false,
-    cwd: gitRepoPathStr
+    cwd: gitRepoPathStr,
   };
 
   if (!noPush) {

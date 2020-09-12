@@ -1,18 +1,18 @@
-import path from "path";
-import { args } from "./args";
-import { executeSnapshot } from "./execute-snapshot";
-import { makeVersionCommit } from "./make-version-commit";
-import { updateVersion } from "./update-version";
-import { checkFileReadWrite } from "./utils/check-file-read-write";
-import { checkRepoStatus } from "./utils/check-repo-status";
-import { getPackageJsonPath } from "./utils/get-package-json-path";
-import { makePathAbsolute } from "./utils/make-path-absolute";
-import { pullUpmBranch } from "./pull-upm-branch";
-import { hasRemote } from "./utils/has-remote";
-import { hasRemoteBranch } from "./utils/has-remote-branch";
-import { hasLocalBranch } from "./utils/has-local-branch";
-import { learnVersion } from "./utils/learn-version";
-import { createGitInstance } from "./utils/create-git-instance";
+import path from 'path';
+import { args } from './args';
+import { executeSnapshot } from './execute-snapshot';
+import { makeVersionCommit } from './make-version-commit';
+import { updateVersion } from './update-version';
+import { checkFileReadWrite } from './utils/check-file-read-write';
+import { checkRepoStatus } from './utils/check-repo-status';
+import { getPackageJsonPath } from './utils/get-package-json-path';
+import { makePathAbsolute } from './utils/make-path-absolute';
+import { pullUpmBranch } from './pull-upm-branch';
+import { hasRemote } from './utils/has-remote';
+import { hasRemoteBranch } from './utils/has-remote-branch';
+import { hasLocalBranch } from './utils/has-local-branch';
+import { learnVersion } from './utils/learn-version';
+import { createGitInstance } from './utils/create-git-instance';
 
 const branch = args.branch;
 const force = !!args.force;
@@ -42,22 +42,17 @@ export async function main() {
   }
 
   const remoteExists = await hasRemote(gitInstance, remote);
-  const remoteBranchExists =
-    remoteExists && (await hasRemoteBranch(gitInstance, remote, branch));
+  const remoteBranchExists = remoteExists && (await hasRemoteBranch(gitInstance, remote, branch));
   const localBranchExists = await hasLocalBranch(gitInstance, branch);
 
   const isFirstTime = !(remoteBranchExists || localBranchExists);
 
   if (localBranchExists && !remoteBranchExists) {
-    console.warn(
-      `<main> A branch named ${branch} exists locally, but not on the remote ${remote}. Pulling will be skipped.`
-    );
+    console.warn(`<main> A branch named ${branch} exists locally, but not on the remote ${remote}. Pulling will be skipped.`);
   }
 
   if (isFirstTime) {
-    console.log(
-      "<main> First time publishing. Version prompt will be skipped."
-    );
+    console.log('<main> First time publishing. Version prompt will be skipped.');
   }
 
   if (!noPull && remoteBranchExists) {
@@ -65,32 +60,15 @@ export async function main() {
   }
 
   const currentVersion = await learnVersion(packageJsonPath);
-  const newVersion = isFirstTime
-    ? currentVersion
-    : await updateVersion(packageJsonPath, currentVersion);
+  const newVersion = isFirstTime ? currentVersion : await updateVersion(packageJsonPath, currentVersion);
 
   console.log(`<main> Version to publish: ${tagPrefix}${newVersion}`);
 
   if (!noCommit && !isFirstTime) {
-    await makeVersionCommit(
-      gitInstance,
-      packageJsonPath,
-      newVersion,
-      noAuthor,
-      tagPrefix
-    );
+    await makeVersionCommit(gitInstance, packageJsonPath, newVersion, noAuthor, tagPrefix);
   }
 
-  await executeSnapshot(
-    packageJsonPath,
-    newVersion,
-    branch,
-    noPush,
-    noAuthor,
-    force,
-    tagPrefix,
-    remote
-  );
+  await executeSnapshot(packageJsonPath, newVersion, branch, noPush, noAuthor, force, tagPrefix, remote);
 
   if (!noPull) {
     await pullUpmBranch(gitInstance, branch, remote);
@@ -99,7 +77,7 @@ export async function main() {
 
 async function handleArgs() {
   if (force) {
-    console.log("<args> Using force.");
+    console.log('<args> Using force.');
   }
 
   if (args.package) {

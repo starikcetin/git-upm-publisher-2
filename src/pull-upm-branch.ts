@@ -1,10 +1,6 @@
-import simpleGit from "simple-git/promise";
+import simpleGit from 'simple-git/promise';
 
-export async function pullUpmBranch(
-  git: simpleGit.SimpleGit,
-  upmBranchName: string,
-  remoteName: string
-) {
+export async function pullUpmBranch(git: simpleGit.SimpleGit, upmBranchName: string, remoteName: string) {
   try {
     /**
      * The syntax is `git fetch remote branch:branch` which basically pulls the `branch` from `remote/branch` without switching to it.
@@ -24,10 +20,8 @@ export async function pullUpmBranch(
      * git checkout currentBranch
      * ```
      */
-    await git.raw(["fetch", remoteName, `${upmBranchName}:${upmBranchName}`]);
-    console.log(
-      `<pull-upm-branch> Pulled ${upmBranchName} from ${remoteName} successfully.`
-    );
+    await git.raw(['fetch', remoteName, `${upmBranchName}:${upmBranchName}`]);
+    console.log(`<pull-upm-branch> Pulled ${upmBranchName} from ${remoteName} successfully.`);
   } catch (e) {
     throw `Pull unsuccessful. Error: ${e}`;
   }

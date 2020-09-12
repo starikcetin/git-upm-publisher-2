@@ -1,6 +1,6 @@
-import path from "path";
-import simpleGit from "simple-git/promise";
-import { findRepoRoot } from "./find-repo-root";
+import path from 'path';
+import simpleGit from 'simple-git/promise';
+import { findRepoRoot } from './find-repo-root';
 
 /**
  * Creates a `SimpleGit` instance that uses the git repository containing the given `packageJsonPath`
