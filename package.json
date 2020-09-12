@@ -23,7 +23,9 @@
     "start": "npm run build && node dist/index.js",
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir dist --extensions \".ts\" --source-maps inline",
-    "build": "npm run build:types && npm run build:js"
+    "build": "npm run build:types && npm run build:js",
+    "prettier:write": "prettier --write .",
+    "prettier:check": "prettier --check ."
   },
   "dependencies": {
     "find-up": "^4.1.0",
@@ -53,5 +55,15 @@
     "rimraf": "^3.0.2",
     "ts-unused-exports": "^6.0.0",
     "typescript": "^3.8.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npx lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*": [
+      "prettier --write"
+    ]
   }
 }
