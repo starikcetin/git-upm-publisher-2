@@ -1,13 +1,6 @@
-import path from 'path';
 import simpleGit from 'simple-git/promise';
-import { findRepoRoot } from './utils/find-repo-root';
 
-export async function pullUpmBranch(packageJsonPath: path.ParsedPath, upmBranchName: string, remoteName: string) {
-  const gitRepoPath = await findRepoRoot(packageJsonPath);
-  const gitRepoPathStr = path.format(gitRepoPath);
-
-  const git = simpleGit(gitRepoPathStr);
-
+export async function pullUpmBranch(git: simpleGit.SimpleGit, upmBranchName: string, remoteName: string) {
   try {
     /**
      * The syntax is `git fetch remote branch:branch` which basically pulls the `branch` from `remote/branch` without switching to it.
