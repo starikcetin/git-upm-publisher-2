@@ -32,6 +32,8 @@ export async function main() {
     packageJsonPath = await getPackageJsonPath();
   }
 
+  await checkFileReadWrite(packageJsonPath);
+
   packageJsonPath = makePathAbsolute(packageJsonPath);
   console.log("<main> 'package.json' path:", path.format(packageJsonPath));
 
@@ -82,6 +84,5 @@ async function handleArgs() {
 
   if (args.package) {
     packageJsonPath = path.parse(args.package);
-    await checkFileReadWrite(packageJsonPath);
   }
 }
