@@ -1,6 +1,7 @@
 [![npm](https://img.shields.io/npm/dt/git-upm-publisher?label=npmjs&style=plastic)](https://www.npmjs.com/package/git-upm-publisher)
 
 # git-upm-publisher-2
+
 Continuation of the [git-upm-publisher](https://github.com/starikcetin/git-upm-publisher), which never worked as it was supposed to.
 
 Written in Typescript this time.
@@ -11,7 +12,7 @@ Written in Typescript this time.
 npm i -g git-upm-publisher
 ```
 
-#### Make sure to delete the python version if you were using it:
+**Make sure to delete the python version if you were using it:**
 
 ```shell
 pip uninstall git-upm-publisher
@@ -37,8 +38,8 @@ Navigate to the folder with the `package.json`, and run `gup`.
 | --package   | -p    | string  | Skip searching and use this package.json path (must include 'package.json').                      |
 | --tagPrefix | -t    | string  | A prefix for the git tag.                                                                         |
 
-
 # Licence
+
 MIT license. Refer to the [LICENSE](LICENSE) file.
 
 Copyright (c) 2020 starikcetin
